@@ -111,7 +111,7 @@
     /* Hero Section */
     .hero {
       position: relative;
-      min-height: 60vh; /* Adjusted to min-height for better visibility */
+      min-height: 45vh; /* Adjusted to min-height for better visibility */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -120,7 +120,7 @@
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       animation: gradientShift 15s ease infinite;
       background-size: 200% 200%;
-      overflow: hidden;
+      overflow: visible;
     }
 
     @media (max-width: 767.98px) {
@@ -184,6 +184,7 @@
    text-transform: uppercase;
    margin-bottom: 1rem;
    opacity: 1; /* Ensure visibility */
+
    text-align: center; /* Center the text */
    display: inline-block; /* Needed for clip-path to work */
    clip-path: inset(0 100% 0 100%); /* Initially hide text from both sides */
@@ -519,7 +520,7 @@ footer .social-icon:hover {
     .role-item {
       opacity: 0;
       transition: opacity 0.5s ease, transform 0.5s ease;
-      text-align: center; /* Uniform center alignment */
+      text-align: left; /* Uniform center alignment */
     }
 
     .role-item.reveal {
@@ -542,7 +543,7 @@ footer .social-icon:hover {
       color: var(--primary);
       background: white;
       transition: background-color 0.3s ease, color 0.3s ease;
-      text-align: center; /* Uniform center alignment */
+      text-align: left; /* Uniform center alignment */
     }
 
     .accordion-button:not(.collapsed) {
@@ -807,9 +808,8 @@ footer .social-icon:hover {
           </div>
         </div>
       </div>
-      <p class="mt-4 text-center">For larger engagements, PLIPs will also be empowered to take on customization responsibility in alignment with customer needs.</p>
-      <p class="text-center">Together, we champion digital transformation to improve human lives — through smart, compliant, and connected manufacturing.</p>
-      <p class="text-center"><strong>Welcome to the PLIP Alliance</strong></p>
+      <p class="mt-4">For larger engagements, PLIPs will also be empowered to take on customization responsibility in alignment with customer needs.</p>
+      <p >Together, we champion digital transformation to improve human lives — through smart, compliant, and connected manufacturing.</p>
     </div>
   </section>
 
