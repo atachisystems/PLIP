@@ -808,8 +808,8 @@ footer .social-icon:hover {
           </div>
         </div>
       </div>
-      <p class="mt-4">For larger engagements, PLIPs will also be empowered to take on customization responsibility in alignment with customer needs.</p>
-      <p >Together, we champion digital transformation to improve human lives — through smart, compliant, and connected manufacturing.</p>
+      <p class="mt-4" style="text-align: center;">For larger engagements, PLIPs will also be empowered to take on customization responsibility in alignment with customer needs.</p>
+      <p style="text-align: center;">Together, we champion digital transformation to improve human lives — through smart, compliant, and connected manufacturing.</p>
     </div>
   </section>
 
@@ -855,25 +855,25 @@ footer .social-icon:hover {
           <div class="card">
             <div class="card-body p-4">
               <h3 class="mb-4 text-center">Partner Application</h3>
-              <form id="partnerForm" action="" method="POST" target="_blank">
+              <form id="partnerForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe34ZGjw8MZkjIHwXqfLsHKmceV8gbPzWj_bOJ8fZOzfxHpiQ/formResponse" method="POST">
                 <div class="mb-3">
                     <label class="form-label" for="fullName">Full Name*</label>
-                    <input name="entry.1234567890" id="fullName" type="text" class="form-control" required aria-describedby="fullNameError">
+                    <input name="entry.1927906654" id="fullName" type="text" class="form-control" required aria-describedby="fullNameError">
                     <div id="fullNameError" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="companyName">Company Name*</label>
-                  <input name="entry.2345678901" id="companyName" type="text" class="form-control" required aria-describedby="companyNameError">
+                  <input name="entry.1735439232" id="companyName" type="text" class="form-control" required aria-describedby="companyNameError">
                   <div id="companyNameError" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="businessEmail">Business Email*</label>
-                  <input name="entry.3456789012" id="businessEmail" type="email" class="form-control" required aria-describedby="businessEmailError">
+                  <input name="entry.1571922032" id="businessEmail" type="email" class="form-control" required aria-describedby="businessEmailError">
                   <div id="businessEmailError" class="invalid-feedback"></div>
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="additionalInfo">Additional Information</label>
-                  <textarea name="entry.4567890123" id="additionalInfo" class="form-control" rows="3" placeholder="Tell us about your company's experience with MES implementations"></textarea>
+                  <textarea name="entry.1895505928" id="additionalInfo" class="form-control" rows="3" placeholder="Tell us about your company's experience with MES implementations"></textarea>
                 </div>
                 
                 <div class="text-center">
@@ -941,51 +941,52 @@ footer .social-icon:hover {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Form Validation
-    document.getElementById('partnerForm').addEventListener('submit', function (e) {
+   document.getElementById('partnerForm').addEventListener('submit', function (e) {
       e.preventDefault();
       let isValid = true;
       const fields = [
         { id: 'fullName', error: 'Full Name is required' },
         { id: 'companyName', error: 'Company Name is required' },
         { id: 'businessEmail', error: 'Business Email is required' }
-        ];
+      ];
 
       fields.forEach(field => {
         const input = document.getElementById(field.id);
         const errorElement = document.getElementById(`${field.id}Error`);
-        if (field.id === 'privacyConsent') {
-          if (!input.checked) {
-            errorElement.textContent = field.error;
-            input.classList.add('is-invalid');
-            isValid = false;
-          } else {
-            errorElement.textContent = '';
-            input.classList.remove('is-invalid');
-          }
+        if (!input.value.trim()) {
+          errorElement.textContent = field.error;
+          input.classList.add('is-invalid');
+          isValid = false;
+        } else if (field.id === 'businessEmail' && !/^\S+@\S+\.\S+$/.test(input.value)) {
+          errorElement.textContent = 'Please enter a valid email address';
+          input.classList.add('is-invalid');
+          isValid = false;
         } else {
-          if (!input.value.trim()) {
-            errorElement.textContent = field.error;
-            input.classList.add('is-invalid');
-            isValid = false;
-          } else if (field.id === 'businessEmail' && !/^\S+@\S+\.\S+$/.test(input.value)) {
-            errorElement.textContent = 'Please enter a valid email address';
-            input.classList.add('is-invalid');
-            isValid = false;
-          } else {
-            errorElement.textContent = '';
-            input.classList.remove('is-invalid');
-          }
+          errorElement.textContent = '';
+          input.classList.remove('is-invalid');
         }
       });
 
       if (isValid) {
-        const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
-        modal.show();
-        setTimeout(() => {
-          this.submit();
-        }, 1000);
+        const formData = new FormData(this);
+        fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors' // Required for Google Forms submission
+        })
+          .then(() => {
+            const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
+            modal.show();
+            this.reset(); // Reset the form after successful submission
+          })
+          .catch(error => {
+            console.error('Submission failed:', error);
+            alert('There was an error submitting your application. Please try again.');
+          });
       }
     });
+
+ 
 
     // Navbar Scroll Effect
     window.addEventListener('scroll', () => {
